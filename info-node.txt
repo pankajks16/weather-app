@@ -1,0 +1,15 @@
+structure of v8:
+
+call stack
+node api's
+call back queue
+event loops
+
+
+for synchronous programming, only call stack is used and we don't have to bother about the other component to get 
+involved in it
+
+call stack works like a normal stack ... just like LIFO data structure. Last In First Out
+
+`${}` usage is called 'template string' in node js framework.
+
