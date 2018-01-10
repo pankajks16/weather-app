@@ -1,6 +1,6 @@
 const request = require('request');
 
-var geocodeAddress = (address) => {
+var geocodeAddress = (address, callback) => {
 	var encodedAddress = encodeURIComponent(address);
 
 	request({
@@ -8,15 +8,15 @@ var geocodeAddress = (address) => {
 		json: true	
 	}, ( error, response, body) => {
 		if (error) {
-			console.log('Some error has occured !!!!!');
-			console.log(error);
+			callback('Error occured from server side ...');
 		} else if( body.status === 'ZERO_RESULTS') {
-			console.log(' The address you are looking for is not available !!! Please check the address');
+			callback(' The address you are looking for is not available !!! Please check the address');
 		} else if( body.status === 'OK') {
-			console.log("STATUS:" + body.status);
-			console.log(` Latitude: ${body.results[0].geometry.location.lat}`);
-			console.log(` Longitude: ${body.results[0].geometry.location.lng}`);
-			console.log(`Address: ${body.results[0].formatted_address}`); 
+			callback(undefined, {
+				address: body.results[0].formatted_address,
+				latitude: body.results[0].geometry.location.lat,
+				Longitude: body.results[0].geometry.location.lng
+			});
 		}
 	});
 
