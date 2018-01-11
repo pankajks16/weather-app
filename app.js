@@ -22,7 +22,15 @@ geocode.geocodeAddress(argv.a, ( error, results) => {
 	if (error) {
 		console.log(error);
 	} else {
-		console.log(JSON.stringify(results, undefined, 2));
+		console.log('Address : ' + results.address);
+		weather.getWeather(results.latitude, results.longitude, ( error, results) => {
+			if (error) {
+				console.log(error);
+			} else {
+				console.log(JSON.stringify(results, undefined, 2));
+				console.log(`The temperature currently is ${results.temperature} and it is a ${results.summary} kind of day ... `);
+			}
+		});
 	}
 });
 

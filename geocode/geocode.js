@@ -2,7 +2,6 @@ const request = require('request');
 
 var geocodeAddress = (address, callback) => {
 	var encodedAddress = encodeURIComponent(address);
-
 	request({
 		url: `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}}`,
 		json: true	
@@ -15,11 +14,10 @@ var geocodeAddress = (address, callback) => {
 			callback(undefined, {
 				address: body.results[0].formatted_address,
 				latitude: body.results[0].geometry.location.lat,
-				Longitude: body.results[0].geometry.location.lng
+				longitude: body.results[0].geometry.location.lng
 			});
 		}
 	});
-
 };
 
 module.exports = {
