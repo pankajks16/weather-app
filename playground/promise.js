@@ -15,11 +15,6 @@ var argv = yargs.options({
 .help()
 .argv;
 
-
-// console.log(argv.a+argv.b);
-// console.log(argv.a,argv.b);
-
-
 var asyncAdd = (a,b) => {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
@@ -28,15 +23,17 @@ var asyncAdd = (a,b) => {
 			} else {
 				reject('Enter the proper number format ...');
 			}
-		}, 2000);
+		}, 500);
 	});
 };
 
-
 asyncAdd(argv.a,argv.b).then((success) => {
 	console.log('Sucess addition is: ', success);
-}, (fail) => {
-	console.log('Error', fail);
+	return asyncAdd(success, '3');
+}).then((result) => {
+	console.log('Final result is: ', result);
+}).catch((err) => {
+	console.log(err);
 });
 
 
